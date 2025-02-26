@@ -11,6 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import br.dev.celso.live18_02.screens.BmiScreen
 import br.dev.celso.live18_02.screens.HomeScreen
 import br.dev.celso.live18_02.ui.theme.Live1802Theme
 
@@ -20,7 +24,17 @@ class MainActivity : ComponentActivity() {
 
     setContent {
       Live1802Theme {
-        HomeScreen()
+
+        val navController = rememberNavController()
+        NavHost(
+          navController = navController,
+          startDestination = "home"
+        ){
+          composable(route = "home") { HomeScreen(navController) }
+          composable(route = "bmi") { BmiScreen(navController) }
+          composable(route = "result") {  }
+        }
+
       }
     }
   }
